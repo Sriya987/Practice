@@ -1,0 +1,31 @@
+>cd "C:\Program Files\Jenkins"
+
+C:\Program Files\Jenkins>java -jar jenkins.war
+Running with Java 25 from C:\Program Files\Eclipse Adoptium\jdk-25.0.0.36-hotspot, which is not yet fully supported.
+Run the command again with the --enable-future-java flag to enable preview support for future Java versions.
+Supported Java versions are: [17, 21]
+See https://jenkins.io/redirect/java-support/ for more information.
+
+C:\Program Files\Jenkins>
+C:\Program Files\Jenkins>set JAVA_HOME=C:\Program Files\Java\jdk-17
+
+C:\Program Files\Jenkins>set PATH=%JAVA_HOME%\bin;%PATH%
+
+C:\Program Files\Jenkins>java -version
+java version "17.0.16" 2025-07-15 LTS
+Java(TM) SE Runtime Environment (build 17.0.16+12-LTS-247)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.16+12-LTS-247, mixed mode, sharing)
+
+C:\Program Files\Jenkins>cd "C:\Program Files\Jenkins"
+
+C:\Program Files\Jenkins>java -jar jenkins.war
+Running from: C:\Program Files\Jenkins\Jenkins.war
+webroot: C:\Users\Sriya Priya\.jenkins\war
+2025-10-09 15:24:56.673+0000 [id=1]     INFO    winstone.Logger#logInternal: Beginning extraction from war file
+2025-10-09 15:24:56.847+0000 [id=1]     WARNING o.e.j.ee9.nested.ContextHandler#setContextPath: Empty contextPath
+.
+.
+.
+
+
+settings->node->newnode
