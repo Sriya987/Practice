@@ -1,0 +1,13 @@
+git init .
+git clone https://github.com/Sriya987/Portfolio.git
+git remote add origin https://github.com/Sriya987/Practice.git
+git branch
+git branch new
+git checkout new
+git config --global --unset user.name
+git config --global --unset user.email
+git config --global user.name Sriya987
+git config --global user.email sriyakotagiriwar@gmail.com
+git push -u origin main
+git add .
+git commit -m "msg"
