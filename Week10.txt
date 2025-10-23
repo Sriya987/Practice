@@ -1,0 +1,64 @@
+Step 1: Verify Puppet Installation
+
+puppet --version
+
+Step 2: Create Module Structure
+
+mkdir -p modules/webserver/manifests
+mkdir -p modules/webserver/lib/puppet/functions/webserver
+
+
+Step 3: Define the Class (Apache Webserver)
+
+File: modules/webserver/manifests/init.pp
+
+class webserver {
+  package { 'apache2':
+    ensure => installed,
+  }
+
+  service { 'apache2':
+    ensure => running,
+    enable => true,
+  }
+
+  file { '/var/www/html/index.html':
+    ensure  => file,
+    content => '<h1>Puppet Webserver Working!</h1>',
+  }
+
+  notify { webserver::greet(): }
+}
+
+
+Step 4: Create a Function
+
+File: modules/webserver/lib/puppet/functions/webserver/greet.rb
+
+Puppet::Functions.create_function(:'webserver::greet') do
+  def greet
+    "Webserver module applied successfully!"
+  end
+end
+
+
+Step 5: Create the Site Manifest
+
+File: site.pp
+
+include webserver
+
+
+Step 6: Apply the Manifest
+
+puppet apply site.pp --modulepath=./modules
+
+
+Step 7: Verify Configuration
+
+Check Apache service:
+
+systemctl status apache2
+
+
+Open browser and visit: http://localhost → You should see "Puppet Webserver Working!"

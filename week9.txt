@@ -1,0 +1,30 @@
+sudo apt update
+sudo apt upgrade -y
+sudo apt install puppet -y
+wget https://apt.puppet.com/puppet7-release-focal.deb
+sudo dpkg -i puppet7-release-focal.deb
+sudo apt update
+sudo apt install puppet-agent -y
+/opt/puppetlabs/bin/puppet --version
+echo 'export PATH=$PATH:/opt/puppetlabs/bin' >> ~/.bashrc
+source ~/.bashrc
+mkdir -p ~/puppet/manifests
+cd ~/puppet/manifests
+
+nano site.pp
+
+# Puppet Manifest Example
+file { '/home/sriya/welcome.txt':
+  ensure  => file,
+  content => "Hello from Puppet on WSL Ubuntu!",
+}
+
+package { 'sl':
+  ensure => installed,
+}
+
+sudo /opt/puppetlabs/bin/puppet apply site.pp
+
+cat /home/sriya/welcome.txt
+
+sl
