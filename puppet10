@@ -1,0 +1,71 @@
+#############################################
+# Example: Puppet Configuration Management
+# Covers: Manifest, Module, Class, and Function
+#############################################
+
+# -------------------------------
+# 1️⃣  MANIFEST (main entry file)
+# -------------------------------
+# File: site.pp
+# This is the main manifest where you include modules/classes
+
+include webserver
+
+
+# -------------------------------
+# 2️⃣  MODULE STRUCTURE
+# -------------------------------
+# Folder: /etc/puppetlabs/code/environments/production/modules/webserver/
+# ├── manifests/
+# │   └── init.pp
+# └── functions/
+#     └── greet.pp
+
+
+# -------------------------------
+# 3️⃣  CLASS DEFINITION
+# -------------------------------
+# File: modules/webserver/manifests/init.pp
+# This class installs, configures, and runs Apache webserver
+
+class webserver {
+
+  # Ensure Apache2 package is installed
+  package { 'apache2':
+    ensure => installed,
+  }
+
+  # Ensure Apache2 service is running and enabled at boot
+  service { 'apache2':
+    ensure => running,
+    enable => true,
+  }
+
+  # Create a sample HTML file
+  file { '/var/www/html/index.html':
+    ensure  => file,
+    content => '<h1>Puppet Webserver Working!</h1>',
+  }
+
+  # Call custom Puppet function
+  notify { greet_message(): }
+}
+
+
+# -------------------------------
+# 4️⃣  FUNCTION DEFINITION
+# -------------------------------
+# File: modules/webserver/functions/greet.pp
+# Defines a custom Puppet function that returns a message
+
+function webserver::greet_message() {
+  notice("Hello from Puppet Function: Webserver is successfully configured!")
+  return "Hello! Puppet Webserver Function Executed."
+}
+
+#############################################
+# ✅ Execution:
+# Run `puppet apply site.pp`
+# This will install Apache, start it, create an index file,
+# and display a custom function message in the Puppet logs.
+#############################################
