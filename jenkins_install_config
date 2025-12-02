@@ -1,0 +1,18 @@
+#using docker
+docker pull jenkins/jenkins:lts
+docker run -d --name jenkins -p 9000:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker ps
+docker start jenkins
+#runs on port 9000
+
+
+#using java
+sudo apt update
+sudo apt install -y openjdk-17-jdk
+java -version
+mkdir -p ~/jenkins
+cd ~/jenkins
+curl -LO https://get.jenkins.io/war-stable/latest/jenkins.war
+java -jar jenkins.war --httpPort=8080 --httpListenAddress=0.0.0.0 &
+
+
