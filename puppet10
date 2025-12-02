@@ -48,7 +48,8 @@ class webserver {
   }
 
   # Call custom Puppet function
-  notice { webserver::greet_message() }
+  # notify { greet_message():}
+  notice ( webserver::greet_message() )
 }
 
 
