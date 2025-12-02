@@ -1,0 +1,19 @@
+sriya@DESKTOP-65N68S0:~/dockerapp2$ cat app.py
+
+from flask import Flask
+
+app=Flask(__name__)
+@app.get('/')
+def hello():
+    return "hi"
+if __name__=="__main__":
+    app.run(host="0.0.0.0",port=5000)
+
+sriya@DESKTOP-65N68S0:~/dockerapp2$ cat Dockerfile
+
+FROM python:3-slim
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 5000
+CMD ["python3","app.py"]
