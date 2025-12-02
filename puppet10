@@ -67,6 +67,7 @@ function webserver::greet_message() {
 #############################################
 # ✅ Execution:
 # Run `puppet apply site.pp`
+sudo /opt/puppetlabs/bin/puppet apply --modulepath=modules site.pp
 # This will install Apache, start it, create an index file,
 # and display a custom function message in the Puppet logs.
 #############################################
